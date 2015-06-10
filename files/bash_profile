@@ -32,18 +32,18 @@ sshr7() {
 	PROST_SCHUMI=$1
 	case $PROST_SCHUMI in
 		"prost")
-SYSTEM="cms"
-;;
-"schumi")
-SYSTEM="delivery"
-;;
-*)
-echo "Invalid parameter $1"
-kill -INT $$
-;;
-esac
-ENV=$2
-ssh gcmelo@$SYSTEM-$ENV-qa.ir7.com.br
+			SYSTEM="cms"
+			;;
+		"schumi")
+			SYSTEM="delivery"
+			;;
+		*)
+			echo "Invalid parameter $1"
+			kill -INT $$
+			;;
+	esac
+	ENV=$2
+	ssh gcmelo@$SYSTEM-$ENV-qa.ir7.com.br
 }
 
 #git helpers
@@ -65,6 +65,7 @@ COLOR_RESET="\033[0m"
 DARK_GREY="\e[38;5;240m"
 USER="\u"
 LIGHT_GREEN="\e[38;5;120m"
+LIGHT_BLUE="\e[38;5;069m"
 CURRENT_PATH="\w"
 DARK_PINK="\e[38;5;197m"
 GIT_BRANCH="\$(__git_ps1)"
@@ -92,7 +93,7 @@ function git_status {
 	elif [[ ! $git_status =~ "working directory clean" ]]; then
 		echo '* '
 	elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-		echo '** '
+		echo -e $LIGHT_BLUE*$COLOR_RESET' '
 	elif [[ $git_status =~ "nothing to commit" ]]; then
 		echo ''
 	else
