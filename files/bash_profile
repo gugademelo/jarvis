@@ -14,6 +14,25 @@ alias l='ls -CF'
 #r7 aliasses
 alias build_boxes='sudo ~/workspace/box_tools/prepare.sh && ~/workspace/box_tools/build_boxes.sh'
 
+#ssh r7
+sshr7() {
+	PROST_SCHUMI=$1
+	case $PROST_SCHUMI in
+		"prost")
+			SYSTEM="cms"
+			;;
+		"schumi")
+			SYSTEM="delivery"
+			;;
+		*)
+			echo "Invalid parameter $1"
+			kill -INT $$
+			;;
+	esac
+	ENV=$2
+	ssh gcmelo@$SYSTEM-$ENV-qa.ir7.com.br
+}
+
 #git helpers
 merge_theirs() {
   BRANCH=$1
@@ -28,7 +47,7 @@ CURRENT_PATH="\w"
 DARK_PINK="\e[38;5;197m"
 GIT_BRANCH="\$(__git_ps1)"
 RESET_COLOR="\[\e[0m\]"
-PS1="qqqqqqqqqqq lalallala lililili ololololol ${DARK_GREY}${USER} ${LIGHT_GREEN}${CURRENT_PATH}${DARK_PINK}${GIT_BRANCH} ${RESET_COLOR}\$ "
+PS1="${DARK_GREY}${USER} ${LIGHT_GREEN}${CURRENT_PATH}${DARK_PINK}${GIT_BRANCH} ${RESET_COLOR}\$ "
 
 #set colors on ls
 if [ -x /usr/bin/dircolors ]; then
