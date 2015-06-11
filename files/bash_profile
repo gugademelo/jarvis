@@ -47,13 +47,16 @@ sshr7() {
 }
 
 #git helpers
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
 merge_theirs() {
 	BRANCH=$1
 	git merge --strategy recursive -X theirs $BRANCH
 }
 
 #collors for ps1
-
 COLOR_RED="\033[0;31m"
 COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
