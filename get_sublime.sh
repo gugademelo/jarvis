@@ -22,9 +22,9 @@ YELLOW="\e[93m"
 BLUE="\e[34m"
 
 function createShortcut() {
-  echo -e "$BLUE Creating terminal shortcut in /usr/local/bin/subl"
-  echo "${SCRIPT}" > "/usr/local/bin/subl"
-  chmod +x "/usr/local/bin/subl"
+  echo -e "$BLUE Creating terminal shortcut in /usr/bin/subl"
+  echo "${SCRIPT}" > "/usr/bin/subl"
+  sudo chmod +x "/usr/bin/subl"
   echo -e "$GREEN Shortcut created, type subl to open $FOLDER_NAME $DEFAULT"
 }
 
