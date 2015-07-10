@@ -1,0 +1,51 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+#ls aliases
+alias ll='ls -alhF'
+
+#r7 aliasses
+alias build_boxes='sudo ~/workspace/box_tools/prepare.sh && ~/workspace/box_tools/build_boxes.sh'
+
+#ssh r7
+sshr7() {
+	PROST_SCHUMI=$1
+	case $PROST_SCHUMI in
+		"prost")
+			SYSTEM="cms"
+			;;
+		"schumi")
+			SYSTEM="delivery"
+			;;
+		*)
+			echo "Invalid parameter $1"
+			kill -INT $$
+			;;
+	esac
+	ENV=$2
+	ssh gcmelo@$SYSTEM-$ENV-qa.ir7.com.br
+}
+
+#git helpers
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
+merge_theirs() {
+	BRANCH=$1
+	git merge --strategy recursive -X theirs $BRANCH
+}
+
+export PS1="\[\033[38;5;8m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;117m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \\$\[$(tput sgr0)\] "
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

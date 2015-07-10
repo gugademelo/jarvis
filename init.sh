@@ -10,8 +10,8 @@ init() {
 }
 
 dotfiles() {
-  for file in `ls files`; do
-    cp files/${file} ~/.${file}
+  for file in `ls dotfiles`; do
+    cp dotfiles/${file} ~/.${file}
   done
 }
 
