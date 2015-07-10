@@ -4,14 +4,14 @@
 VERSION=$1
 
 #globals
-ROOT="/usr/local/sublime-text-3"
+ROOT="/usr/share/sublime-text-3"
 FOLDER_NAME="sublime_text_3_"
 FOLDER_NAME+="$VERSION"
 SCRIPT="#!/bin/sh
 if [[ \${1} == \"--help\" ]]; then
-/usr/local/sublime-text-3/current/sublime_text --help
+/usr/share/sublime-text-3/current/sublime_text --help
 else
-/usr/local/sublime-text-3/current/sublime_text \$@ > /dev/null 2>&1 &
+/usr/share/sublime-text-3/current/sublime_text \$@ > /dev/null 2>&1 &
 fi"
 
 # colors
@@ -69,7 +69,8 @@ function download() {
   fi
 
   echo -e "$BLUE Downloading from $download_url $DEFAULT"
-  sudo wget $download_url $ROOT
+  cd $ROOT
+  sudo wget $download_url
   echo -e "$GREEN Download complete $DEFAULT"
 
   extract
